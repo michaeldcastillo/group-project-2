@@ -1,5 +1,5 @@
 // Get references to page elements
-var $exampleText = $("#example-text");
+var $mealText = $("#meal-text");
 var $exampleDescription = $("#example-description");
 var $submitBtn = $("#submit");
 var $exampleList = $("#example-list");
@@ -65,7 +65,7 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var example = {
-    text: $exampleText.val().trim(),
+    text: $mealText.val().trim(),
     description: $exampleDescription.val().trim()
   };
 
@@ -78,7 +78,7 @@ var handleFormSubmit = function(event) {
     refreshExamples();
   });
 
-  $exampleText.val("");
+  $mealText.val("");
   $exampleDescription.val("");
 };
 
