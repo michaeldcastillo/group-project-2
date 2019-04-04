@@ -42,13 +42,13 @@ Add the code below to the .env file, save, and close
 ```
 Open MySQL Workbench to the local instance created during installation
 
-Click add SQL ![alt](https://github.com/michaeldcastillo/group-project-2/blob/master/demo/add-sql.PNG)
+Click add SQL ![alt](https://github.com/michaeldcastillo/group-project-2/blob/master/public/demo/add-sql.PNG)
 
 Copy the contents of seed.sql to the SQL editor in Workbench
 
-Click the Execute button ![alt](https://github.com/michaeldcastillo/group-project-2/blob/master/demo/run.PNG)
+Click the Execute button ![alt](https://github.com/michaeldcastillo/group-project-2/blob/master/public/demo/run.PNG)
 
-You should see a message that indicates your action was successful ![alt](https://github.com/michaeldcastillo/group-project-2/blob/master/demo/success.PNG)
+You should see a message that indicates your action was successful ![alt](https://github.com/michaeldcastillo/group-project-2/blob/master/public/demo/success.PNG)
 
 Your root directory should look like this
 
