@@ -1,26 +1,30 @@
+/* eslint-disable prettier/prettier */
 var db = require("../models");
 
 module.exports = function(app) {
-  // Get all examples
-  app.get("/api/examples", function(req, res) {
-    db.Example.findAll({}).then(function(dbExamples) {
-      res.json(dbExamples);
+  // Get All Meals - front end can display all in dropdown, 
+  // and only toMake=true in a display div
+  app.get("/api/recipes", function(req, res) {
+    db.Recipe.findAll({}).then(function(dbRecipe) {
+      res.json(dbRecipe);
     });
   });
 
-  // Create a new example
-  app.post("/api/examples", function(req, res) {
-    db.Example.create(req.body).then(function(dbExample) {
-      res.json(dbExample);
+  // Create a new Recipe
+  app.post("/api/recipes", function(req, res) {
+    db.Recipe.create(req.body).then(function(dbNewMeal) {
+      res.json(dbNewMeal);
     });
   });
 
-  // Delete an example by id
-  app.delete("/api/examples/:id", function(req, res) {
-    db.Example.destroy({ where: { id: req.params.id } }).then(function(
-      dbExample
+  // Delete a Recipe by id -- THIS WILL DELETE FROM DATABASE -- 
+  // Front end should make two buttons - one is to deselect from menu plan, 
+  // the other is to DELETE recipe completely
+  app.delete("/api/recipes/:id", function(req, res) {
+    db.Recipe.destroy({ where: { id: req.params.id } }).then(function(
+      dbDelete
     ) {
-      res.json(dbExample);
+      res.json(dbDelete);
     });
   });
 };
