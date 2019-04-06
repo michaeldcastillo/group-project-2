@@ -9,7 +9,6 @@ module.exports = function(sequelize, DataTypes) {
     },
     createdAt: {
       type: DataTypes.DATE
-      //   allowNull: false
     },
     updatedAt: DataTypes.DATE,
     deletedAt: DataTypes.DATE

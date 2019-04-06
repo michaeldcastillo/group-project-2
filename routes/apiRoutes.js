@@ -17,11 +17,17 @@ module.exports = function (app) {
     });
   });
 
-  // Create an Ingredient and add to recipe
+  // Create a new Ingredient - insert into Ingredient Table
+  app.post("/api/ingredients", function (req, res) {
+    db.Ingredient.create(req.body).then(function (NewIngredient) {
+      res.json(NewIngredient);
+    });
+  });
+
+  // add ingredient to recipe
   app.post("/api/recipes/:recipeID/ingredients/:ingredientID", function (req, res) {
     db.Recipe.findByPk(req.params.recipeID)
       .then(function (recipe) {
-
         recipe.setIngredients([req.params.ingredientID]).then(function () {
           res.json({});
         });
@@ -29,20 +35,20 @@ module.exports = function (app) {
   });
 
 
-  app.post("/api/ingredients", function (req, res) {
-    db.Ingredient.create(req.body).then(function (dbNewIngredient) {
-      res.json(dbNewIngredient);
-    });
-  });
+ 
 
 
   // Delete a Recipe by id -- THIS WILL DELETE FROM DATABASE -- 
   // Front end should make two buttons - one is to deselect from menu plan, 
   // the other is to DELETE recipe completely
-  app.delete("/api/recipes/:id", function (req, res) {
-    db.Recipe.destroy({ where: { id: req.params.id } }).then(function (
-      dbDelete
-    ) {
+  app.delete("/api/recipes/:recipeID", function (req, res) {
+    db.Recipe.destroy({ where: { id: req.params.recipeID } }).then(function (dbDelete) {
+      res.json(dbDelete);
+    });
+  });
+
+  app.delete("/api/ingredients/:ingredientID", function (req, res) {
+    db.Ingredient.destroy({ where: { id: req.params.ingredientID } }).then(function (dbDelete) {
       res.json(dbDelete);
     });
   });
