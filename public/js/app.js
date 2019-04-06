@@ -1,47 +1,47 @@
 // Get references to page elements
-var $mealText = $("#meal-text");
-var $exampleDescription = $("#example-description");
+var $recipeText = $("#recipe-text");
+var $recipeOption = $("#recipe-option").val();
 var $submitBtn = $("#submit");
-var $exampleList = $("#example-list");
+var $recipeList = $("#recipe-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
-  saveExample: function(example) {
+  saveRecipe: function(recipe) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/examples",
-      data: JSON.stringify(example)
+      url: "api/recipes",
+      data: JSON.stringify(recipe)
     });
   },
-  getExamples: function() {
+  getRecipes: function() {
     return $.ajax({
-      url: "api/examples",
+      url: "api/recipes",
       type: "GET"
     });
   },
-  deleteExample: function(id) {
+  deleteRecipe: function(id) {
     return $.ajax({
-      url: "api/examples/" + id,
+      url: "api/recipes/" + id,
       type: "DELETE"
     });
   }
 };
 
-// refreshExamples gets new examples from the db and repopulates the list
-var refreshExamples = function() {
-  API.getExamples().then(function(data) {
-    var $examples = data.map(function(example) {
+// refreshRecipes gets new examples from the db and repopulates the list
+var refreshRecipes = function() {
+  API.getRecipes().then(function(data) {
+    var $recipes = data.map(function(recipe) {
       var $a = $("<a>")
-        .text(example.text)
-        .attr("href", "/example/" + example.id);
+        .text(recipe.text)
+        .attr("href", "/recipe/" + recipe.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item",
-          "data-id": example.id
+          "data-id": recipe.id
         })
         .append($a);
 
@@ -54,8 +54,8 @@ var refreshExamples = function() {
       return $li;
     });
 
-    $exampleList.empty();
-    $exampleList.append($examples);
+    $recipeList.empty();
+    $recipeList.append($recipes);
   });
 };
 
@@ -64,22 +64,21 @@ var refreshExamples = function() {
 var handleFormSubmit = function(event) {
   event.preventDefault();
 
-  var example = {
-    text: $mealText.val().trim(),
-    description: $exampleDescription.val().trim()
+  var recipe = {
+    text: $recipeText.val().trim()
   };
 
-  if (!(example.text && example.description)) {
-    alert("You must enter an example text and description!");
+  if (!recipe.text) {
+    alert("You must enter an recipe!");
     return;
   }
 
-  API.saveExample(example).then(function() {
-    refreshExamples();
+  API.saveRecipe(recipe).then(function() {
+    refreshRecipes();
   });
 
-  $mealText.val("");
-  $exampleDescription.val("");
+  $recipeText.val("");
+  $recipeOption.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
@@ -89,11 +88,11 @@ var handleDeleteBtnClick = function() {
     .parent()
     .attr("data-id");
 
-  API.deleteExample(idToDelete).then(function() {
-    refreshExamples();
+  API.deleteRecipe(idToDelete).then(function() {
+    refreshRecipes();
   });
 };
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
-$exampleList.on("click", ".delete", handleDeleteBtnClick);
+$recipeList.on("click", ".delete", handleDeleteBtnClick);

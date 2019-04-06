@@ -3,23 +3,24 @@
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
-        <h2>What's Cookin'!</h2>
         <form class="clearfix mb-4" action="POST">
+          <label for="recipe-option">Select a recipe</label>
+          <select class="form-control" id="recipe-option">
+            <option value="one">One</option>
+            <option value="two">Two</option>
+            <option value="three">Three</option>
+          </select>
           <div class="form-group">
-            <label for="meal-text">Enter a meal</label>
-            <input type="text" id="meal-text" class="form-control" aria-describedby="meal-text" placeholder="Burger">
-          </div>
-          <div class="form-group">
-            <label for="example-description">Example Description</label>
-            <textarea class="form-control" id="example-description" aria-describedby="example-description" placeholder="Enter Example Description"></textarea>
+            <label for="recipe-text">Enter a recipe</label>
+            <input type="text" id="recipe-text" class="form-control" aria-describedby="recipe-text" placeholder="Burger">
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
-        <h3>Examples:</h3>
-        <ul id="example-list" class="list-group">
-          {{#each examples}}
+        <h3>Cooking this week:</h3>
+        <ul id="recipe-list" class="list-group">
+          {{#each recipes}}
           <li data-id="{{this.id}}" class="list-group-item">
-            <a href="example/{{this.id}}">{{this.text}}</a>
+            <a href="recipe/{{this.id}}">{{this.text}}</a>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}

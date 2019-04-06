@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row">
+    <div class="col-8 offset-2">
+      <div class="card mt-4">
+        <div class="card-body">
+          <h5 class="card-title">Recipe</h5>  
+          <p>
+            <strong>ID</strong>: {{recipe.id}}</p>
+          <p>
+          <p>
+            <strong>Text</strong>: {{recipe.text}}</p>
+          <p>
+            <strong>Ingredients:</strong> {{recipe.ingredients}}</p>
+            <ul id="ingredient-list" class="list-group">
+              {{#each ingredients}}
+              <li data-id="{{this.id}}" class="list-group-item">
+                <a href="recipe/{{this.id}}">{{this.text}}</a>
+                <button class="btn btn-danger float-right delete">ｘ</button>
+              </li>
+              {{/each}}
+            </ul>
+            <form class="clearfix mb-4" action="POST">
+              <div class="form-group">
+                <label for="recipe-text">Add an ingredient</label>
+                <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text" placeholder="Beef">
+              </div>
+              <button id="submit" class="btn btn-primary float-right">Submit</button>
+            </form>
+            <a href="/">← Back To Home</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
