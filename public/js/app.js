@@ -3,6 +3,8 @@ var $recipeText = $("#recipe-text");
 var $recipeOption = $("#recipe-option").val();
 var $submitBtn = $("#submit");
 var $recipeList = $("#recipe-list");
+var $ingredientText = $("#ingredient-text");
+var $submitIngredient = $("#submit-ingredient");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -14,6 +16,16 @@ var API = {
       type: "POST",
       url: "api/recipes",
       data: JSON.stringify(recipe)
+    });
+  },
+  saveIngredient: function(ingredient) {
+    return $.ajax({
+      headers: {
+        "Content-Type": "application/json"
+      },
+      type: "POST",
+      url: "/api/recipes/:recipeID/ingredients/" + $ingredientText,
+      data: JSON.stringify(ingredient)
     });
   },
   getRecipes: function() {
@@ -35,7 +47,7 @@ var refreshRecipes = function() {
   API.getRecipes().then(function(data) {
     var $recipes = data.map(function(recipe) {
       var $a = $("<a>")
-        .text(recipe.text)
+        .text(recipe.recipeName)
         .attr("href", "/recipe/" + recipe.id);
 
       var $li = $("<li>")
@@ -65,15 +77,35 @@ var handleFormSubmit = function(event) {
   event.preventDefault();
 
   var recipe = {
-    text: $recipeText.val().trim()
+    recipeName: $recipeText.val().trim()
   };
 
-  if (!recipe.text) {
+  if (!recipe.recipeName) {
     alert("You must enter an recipe!");
     return;
   }
-
+  console.log(recipe);
   API.saveRecipe(recipe).then(function() {
+    refreshRecipes();
+  });
+
+  $recipeText.val("");
+  $recipeOption.val("");
+};
+
+var handleIngredientSubmit = function(event) {
+  event.preventDefault();
+
+  var ingredient = {
+    ingredient: $ingredientText.val().trim()
+  };
+
+  if (!ingredient.ingredient) {
+    alert("You must enter an ingredient!");
+    return;
+  }
+  console.log(ingredient);
+  API.saveIngredient(ingredient).then(function() {
     refreshRecipes();
   });
 
@@ -95,4 +127,5 @@ var handleDeleteBtnClick = function() {
 
 // Add event listeners to the submit and delete buttons
 $submitBtn.on("click", handleFormSubmit);
+$submitIngredient.on("click", handleIngredientSubmit);
 $recipeList.on("click", ".delete", handleDeleteBtnClick);
