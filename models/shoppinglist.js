@@ -1,15 +1,10 @@
 module.exports = function(sequelize, DataTypes) {
-  var List = sequelize.define("Example", {
+  var List = sequelize.define("List", {
     onList: {
       type: DataTypes.BOOLEAN,
       allowNull: false,
-      default: false
+      defaultValue: false
     }
   });
   return List;
 };
-
-// db.comments.belongsTo(db.posts);
-// db.posts.hasMany(db.comments);
-// db.posts.belongsTo(db.users);
-// db.users.hasMany(db.posts);

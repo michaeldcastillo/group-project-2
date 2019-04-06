@@ -1,5 +1,5 @@
 module.exports = function(sequelize, DataTypes) {
-  var Recipe = sequelize.define("Recipes", {
+  var Recipe = sequelize.define("Recipe", {
     recipeName: {
       type: DataTypes.STRING,
       allowNull: false,
@@ -9,18 +9,24 @@ module.exports = function(sequelize, DataTypes) {
     },
     toMake: {
       type: DataTypes.BOOLEAN,
-      allowNull: false,
-      default: true
-    }
+      defaultValue: true,
+      allowNull: false
+    },
+    createdAt: {
+      type: DataTypes.DATE
+      //   allowNull: false
+    },
+    updatedAt: DataTypes.DATE,
+    deletedAt: DataTypes.DATE
   });
 
-  Recipe.associate = function(models) {
-    // Associating Author with Posts
-    // When an Author is deleted, also delete any associated Posts
-    Recipe.hasMany(models.Ingredient, {
-      onDelete: "cascade"
-    });
-  };
+  //   Recipe.associate = function(models) {
+  //     // Associating Author with Posts
+  //     // When an Author is deleted, also delete any associated Posts
+  //     Recipe.hasMany(models.db.Ingredient, {
+  //       onDelete: "cascade"
+  //     });
+  //   };
 
   return Recipe;
 };
