@@ -2,7 +2,7 @@
   "development": {
     "username": "root",
     "password": "process.env.PSWD",
-    "database": "exampledb",
+    "database": "whuzcookingdb",
     "host": "localhost",
     "dialect": "mysql"
   },

@@ -40,4 +40,7 @@ Object.keys(db).forEach(function(modelName) {
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
 
+db.Ingredient.belongsToMany(db.Recipe, { through: db.List });
+db.Recipe.belongsToMany(db.Ingredient, { through: db.List });
+
 module.exports = db;
