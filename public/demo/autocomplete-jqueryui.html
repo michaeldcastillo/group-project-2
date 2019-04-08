@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo Autocomplete w/jQuery UI</title>
+    <!-- jQuery + jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+        .ui-autocomplete {
+          max-height: 70px;
+          overflow-y: auto;
+          /* prevent horizontal scrollbar */
+          overflow-x: hidden;
+        }
+        /* IE 6 doesn't support max-height
+         * we use height instead, but this forces the menu to always be this tall
+         */
+        * html .ui-autocomplete {
+          height: 70px;
+        }
+        </style>
+    </head>
+
+    <body style="font-family:Arial, Helvetica, sans-serif;">
+        <!-- -------------------------------------------------- -->
+
+        <h2>Autocomplete w/Array</h2>
+      
+        <div class="ui-widget">
+          <input id="tags">
+        </div>
+            <br>
+            <hr>
+            <br>
+
+            <a href="https://jqueryui.com/autocomplete/#maxheight" target="_blank">https://jqueryui.com/autocomplete/#maxheight</a>
+
+                <!-- -------------------------------------------------- -->
+
+<!-- ============================== JavaScript ======================================== -->
+        <script>
+          $(function() {
+            var availableTags = ["Cheese","Lettuce","Tomatoes","Ground Beef","Corn Tortillas","Pico De Gallo","Taco Seasoning"];
+            $("#tags").autocomplete({ source: availableTags });
+          });
+        </script>
+    
+    </body>
+    </html>
