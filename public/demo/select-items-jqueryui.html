@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo Select Items w/jQuery UI</title>
+    <!-- jQuery + jQuery UI -->
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+    <style>
+            #select-result { font-weight:bold; color:green; }
+            #selectable .ui-selecting { background: silver; }
+            #selectable .ui-selected { background: gray; color: white; }
+            #selectable { list-style-type: none; margin: 0; padding: 0; width: 200px; }
+            #selectable li { margin: 3px; padding: 0.4em; font-size: 1.0em; height: 18px; border:1px solid silver;}
+     </style>
+    </head>
+
+    <body style="font-family:Arial, Helvetica, sans-serif;">
+        <!-- -------------------------------------------------- -->
+
+        <h2>Select Single (w/Ordered List)</h2>
+        <p>Note: How do you deselect one/all once you have made a selection?</p>
+        <p>You can click and drag to select more than one, but it's not obvious that it's possible just by looking at it.</p> 
+  
+        <ol id="selectable">
+            <li class="ui-widget-content" value='cheese'>Cheese</li>
+            <li class="ui-widget-content" value='lettuce'>Lettuce</li>
+            <li class="ui-widget-content" value='tomatoes'>Tomatoes</li>
+            <li class="ui-widget-content" value='beef'>Ground Beef</li>
+            <li class="ui-widget-content" value='tortillas'>Corn Tortillas</li>
+            <li class="ui-widget-content" value='pico'>Pico De Gallo</li>
+            <li class="ui-widget-content" value='seasoning'>Taco Seasoning</li>
+        </ol>
+            
+        <h2>Output</h2>
+                
+            <p>You've selected: <span id="select-result"></span></p>
+
+            <br>
+            <hr>
+            <br>
+
+            <a href="https://jqueryui.com/selectable/#serialize" target="_blank">https://jqueryui.com/selectable/#serialize</a>
+
+                <!-- -------------------------------------------------- -->
+
+<!-- ============================== JavaScript ======================================== -->
+        <script>
+        $(function() {
+          $("#selectable").selectable({
+            stop: function() {
+              var result = $("#select-result").empty();
+              $(".ui-selected", this).each(function() {
+                //grab the index...
+                var index = $("#selectable li").index(this);
+                //result.append((index + 1));
+
+                //grab the text value...
+                var text = $(this).text();
+                //result.append(text);
+
+                //grab the attribute value...
+                var value = $(this).attr("value");
+                //result.append(value);
+
+                //concatenate all...
+                result.append((index + 1) + ", " + text + ", " + value + "; ");     
+              });
+            }
+          });
+        });
+        </script>
+    
+    </body>
+    </html>

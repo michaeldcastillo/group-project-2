@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo Select Items</title>
+</head>
+<body>
+
+        <h2>Radio Single</h2>
+
+        <form id="form-radio" action="" method="GET">
+            <input type="radio" name="" value="cheese" checked> Cheese<br>
+            <input type="radio" name="" value="lettuce"> Lettuce<br>
+            <input type="radio" name="" value="tomatoes"> Tomatoes<br>
+            <input type="radio" name="" value="beef"> Ground Beef<br>
+            <input type="radio" name="" value="tortillas"> Corn Tortillas<br>
+            <input type="radio" name="" value="pico"> Pico De Gallo<br>
+            <input type="radio" name="" value="seasoning"> Taco Seasoning<br>
+            <input id="button-radio" type="submit">
+        </form> 
+
+        <h2>Output</h2>
+            <div id="output-radio"></div>
+
+            <br>
+            <hr>
+            <br>
+        <!-- -------------------------------------------------- -->
+
+        <h2>Select Single</h2>
+        <form id="form-single" action="" method="GET">
+                <select id="select-single" name="ingredients">
+                 <option value="">--Please choose an option--</option>
+                  <option value="cheese">Cheese</option>
+                  <option value="lettuce">Lettuce</option>
+                  <option value="tomatoes">Tomatoes</option>
+                  <option value="beef">Ground Beef</option>
+                  <option value="tortillas">Corn Tortillas</option>
+                  <option value="pico">Pico De Gallo</option>
+                  <option value="seasoning">Taco Seasoning</option>
+                </select>
+                <br>
+                <input id="button-single" type="submit">
+            </form>
+
+            <h2>Output</h2>
+            <div id="output-single"></div>
+        <br>
+        <hr>
+        <br>
+        <!-- -------------------------------------------------- -->
+
+        <h2>Select Multiple</h2>
+        <form id="form-multiple" action="" method="GET">
+            <select name="ingredients" multiple size="7">
+              <option value="cheese">Cheese</option>
+              <option value="lettuce">Lettuce</option>
+              <option value="tomatoes">Tomatoes</option>
+              <option value="beef">Ground Beef</option>
+              <option value="tortillas">Corn Tortillas</option>
+              <option value="pico">Pico De Gallo</option>
+              <option value="seasoning">Taco Seasoning</option>
+            </select>
+            <br>
+            <input id="button-multiple" type="submit">
+        </form>
+            
+            <p>Hold down the Ctrl (windows) / Command (Mac) button to select multiple options.</p>
+
+
+
+        <h2>Output</h2>
+            <div id="output-multiple"></div>
+
+            <br>
+            <hr>
+            <br>
+
+            <!-- -------------------------------------------------- -->
+
+            <h2>Checked Multiple</h2>
+
+            <form id="form-checkbox" action="" method="GET">
+                <input type="checkbox" name="" value="cheese"> Cheese<br>
+                <input type="checkbox" name="" value="lettuce"> Lettuce<br>
+                <input type="checkbox" name="" value="tomatoes"> Tomatoes<br>
+                <input type="checkbox" name="" value="beef"> Ground Beef<br>
+                <input type="checkbox" name="" value="tortillas"> Corn Tortillas<br>
+                <input type="checkbox" name="" value="pico"> Pico De Gallo<br>
+                <input type="checkbox" name="" value="seasoning"> Taco Seasoning<br>
+                <input id="button-checkbox" type="submit">
+            </form> 
+    
+            <h2>Output</h2>
+                <div id="output-checkbox"></div>
+    
+                <br>
+                <hr>
+                <br>
+
+                <!-- -------------------------------------------------- -->
+
+<!-- ============================== JavaScript ======================================== -->
+            <script>
+                var outputRadio = document.getElementById("output-radio");
+                var outputSingle = document.getElementById("output-single");
+                var outputMultiple = document.getElementById("output-multi");
+                var outputCheckbox = document.getElementById("output-checkbox");
+
+                document.getElementById("button-radio").addEventListener("click", function(event) {
+                    event.preventDefault(); //prevents page refresh, but default form data is only available after a refresh
+                    console.log(event);                    
+                });
+                
+                document.getElementById("button-single").addEventListener("click", function(event) {
+                    event.preventDefault(); //prevents page refresh, but default form data is only available after a refresh
+                    console.log(event);      
+                    var value = document.getElementById("select-single").value;  
+                    console.log("value = ", value);  
+                    outputSingle.innerText = value;          
+                });
+
+                document.getElementById("button-multiple").addEventListener("click", function(event) {
+                    event.preventDefault(); //prevents page refresh, but default form data is only available after a refresh
+                    console.log(event);                    
+                });
+
+                document.getElementById("button-checkbox").addEventListener("click", function(event) {
+                    event.preventDefault(); //prevents page refresh, but default form data is only available after a refresh
+                    console.log(event);                    
+                });
+
+
+
+                
+
+            </script>
+    
+</body>
+</html>
