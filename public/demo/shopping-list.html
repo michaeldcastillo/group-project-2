@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo Shopping-List</title>
+    <link rel="stylesheet" type="text/css" href="multi-select.css">
+</head>
+<body style="font-family:Arial, Helvetica, sans-serif;">
+    <h2>Click to select an option:</h2>
+    <select id='callbacks' multiple='multiple'>
+        <option value='elem_1'>Cheddar Cheese Slices</option>
+        <option value='elem_2'>80/20 Angus Ground Beef</option>
+        <option value='elem_3'>Beefsteak Tomatoes</option>
+        <option value='elem_4'>Dill Pickle Slices</option>
+        <option value='elem_5'>Red Onions</option>
+        <option value='elem_6'>Yellow Mustard</option>
+        ...
+        <option value='elem_100'>Ad Infinitum</option>
+    </select>
+    <h2>Output:</h2>
+    <div style="width:370px;">
+    <div style="border:1px solid silver; float:left; width:50%; box-sizing:border-box; color:gray;" id="">afterSelect</div>
+    <div style="border:1px solid silver; float:left; width:50%; box-sizing:border-box; color:gray;" id="">afterDeselect</div>
+    <div style="border:0px solid lime; float:left; width:50%; box-sizing:border-box; color:red; font-weight:bold;" id="after-select"></div>
+    <div style="border:0px solid aqua; float:left; width:50%; box-sizing:border-box; color:red; font-weight:bold;" id="after-deselect"></div>
+    <div>
+        <br><br>
+    <p>Also check the console...</p>
+    <p>Source: <a href="http://loudev.com/" target="_blank">http://loudev.com/</a></p>
+
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0/jquery.min.js"></script>
+    <script src="jquery.multi-select.js"></script>
+    <script type="text/javascript">
+    // run callbacks
+    // element.multiSelect({ });
+    // element.multiSelect({ key:value });
+    // element.multiSelect({ afterSelect:function() {}, afterDeselect:function() {} });
+    // element.multiSelect({ afterSelect: function(values) { do something with the select values }, afterDeselect: function(values) { do something with the select values } });
+    /* 
+    element.multiSelect({ afterSelect: function(values) { 
+        //do something with the values;
+        }, 
+        afterDeselect: function(values) { 
+        //do something with the select values;
+        } 
+    });
+    */
+    /*
+    element.multiSelect({ 
+        afterSelect: function(values) { 
+            //do something with the values;
+        },
+        afterDeselect: function(values) { 
+            //do something with the select values;
+        } 
+    });
+    */
+    $('#callbacks').multiSelect({
+        afterSelect: function(values){
+          //alert("Select value: "+values);
+          console.log("\nreturns an array of values...");
+          console.log("afterSelect values = ", values);
+          console.log("values.length = ", values.length);
+          console.log("you can only select one at a time!");
+          console.log("value of item clicked = ", values[0]);
+          $("#after-select").text(values[0]);
+        },
+        afterDeselect: function(values){
+          //alert("Deselect value: "+values);
+          console.log("\nreturns an array of values...");
+          console.log("afterDeselect values = ", values);
+          console.log("values.length = ", values.length);
+          console.log("you can only select one at a time!");
+          console.log("value of item clicked = ", values[0]);
+          $("#after-deselect").text(values[0]);
+        }
+    });
+    </script>
+</body>
+</html>
