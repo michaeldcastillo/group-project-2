@@ -17,24 +17,45 @@ module.exports = function (app) {
     });
   });
 
-  // Create a new Ingredient - insert into Ingredient Table
-  app.post("/api/ingredients", function (req, res) {
-    db.Ingredient.create(req.body).then(function (NewIngredient) {
-      res.json(NewIngredient);
-    });
-  });
+  // // Create a new Ingredient - insert into Ingredient Table
+  // app.post("/api/ingredients", function (req, res) {
+  //   db.Ingredient.create(req.body).then(function (NewIngredient) {
+  //     res.json(NewIngredient);
+  //   });
+  // });
 
   // add ingredient to recipe
-  app.post("/api/recipes/:recipeID/ingredients/:ingredientID", function (req, res) {
-    db.Recipe.findByPk(req.params.recipeID)
-      .then(function (recipe) {
-        recipe.setIngredients([req.params.ingredientID]).then(function () {
-          res.json({});
+  app.post("/api/recipes/:recipeID/ingredients/:ingredient", function (req, res) {
+    db.Ingredient.create(req.body).then(function (NewIngredient) {
+      // res.json(NewIngredient);
+      db.Recipe.findByPk(req.params.recipeID)
+        .then(function (recipe) {
+          recipe.setIngredients([NewIngredient.ingredientID]).then(function () {
+            res.json(NewIngredient);
+          });
         });
-      });
+    });
   });
+      
 
+  // Create a new Ingredient - insert into Ingredient Table
+  // app.post("/api/ingredients", function (req, res) {
+  //   db.Ingredient.create(req.body).then(function (NewIngredient) {
+  //     res.json(NewIngredient);
+  //   });
+  // });
 
+  // add ingredient to recipe
+  // app.post("/api/recipes/:recipeID/ingredients/:ingredientID", function (req, res) {
+  //   db.Recipe.findByPk(req.params.recipeID)
+  //     .then(function (recipe) {
+  //       recipe.setIngredients([req.params.ingredientID]).then(function () {
+  //         res.json({});
+  //       });
+  //     });
+  // });
+
+  // add ingredient to recipe
  
 
 
@@ -53,3 +74,6 @@ module.exports = function (app) {
     });
   });
 };
+
+
+   
