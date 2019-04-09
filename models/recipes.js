@@ -10,7 +10,16 @@ module.exports = function(sequelize, DataTypes) {
     toMake: {
       type: DataTypes.BOOLEAN,
       defaultValue: true,
-      allowNull: false
+      allowNull: false,
+      set: function(value) {
+        if (value === "true") {
+          value = true;
+        }
+        if (value === "false") {
+          value = false;
+        }
+        this.setDataValue("toMake", value);
+      }
     },
     createdAt: {
       type: DataTypes.DATE
