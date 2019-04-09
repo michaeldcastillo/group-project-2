@@ -8,7 +8,7 @@
   },
   "test": {
     "username": "root",
-    "password": null,
+    "password": "process.env.PSWD",
     "database": "testdb",
     "host": "localhost",
     "dialect": "mysql",
