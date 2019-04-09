@@ -4,11 +4,10 @@ var db = require("../models");
 module.exports = function (app) {
 
 
-  ///////////// GETS ///////////////
+  ///////////// GET ///////////////
   
 
-  // Get All Meals - front end can display all in dropdown, 
-  // and only toMake=true in a display div
+  // Get All Recipes
   app.get("/api/recipes", function (req, res) {
     db.Recipe.findAll({}).then(function (dbRecipe) {
       res.json(dbRecipe);
@@ -40,9 +39,25 @@ module.exports = function (app) {
     });
   });
  
+  // Get all ingredients per a recipe
+  app.get("/api/shoppinglist", function (req, res) {
+    // recipeID = req.params.recipeID;
+    db.Ingredient.findAll({
+      include: [{
+        model: db.Recipe,
+        through: {
+          attributes: ["RecipeId", "IngredientId", "onList"],
+          where: {onList: true}
+        }
+      }]
+    }).then(function (dbRecipe) {
+      //does this work, or do I need to pull more info from List table here??
+      res.json(dbRecipe);
+    });
+  });
 
 
-  ////////////// POSTS ////////////////
+  ////////////// POST ////////////////
 
   // Create a new Recipe
   app.post("/api/recipes", function (req, res) {
@@ -81,39 +96,41 @@ module.exports = function (app) {
     });
   });
 
-  // app.post("/api/recipes/:recipeID", function (req, res) {
-  //   db.Ingredient.create(req.body).then(function (newIngredient) {
-  //     // res.json(NewIngredient);
-  //     // req.params.ingredient = NewIngredient.ingredient;
-  //     console.log(newIngredient.id);
-  //     // db.List.create({ RecipeId: req.params.recipeID, IngredientID: newIngredient.id } )
-  //     //   .then(function () {
-  //     //     res.json(newIngredient);
-  //     //   });
-  //   });
-  // });
-      
 
-  // Create a new Ingredient - insert into Ingredient Table
-  // app.post("/api/ingredients", function (req, res) {
-  //   db.Ingredient.create(req.body).then(function (NewIngredient) {
-  //     res.json(NewIngredient);
-  //   });
-  // });
 
-  // add ingredient to recipe
-  // app.post("/api/recipes/:recipeID/ingredients/:ingredientID", function (req, res) {
-  //   db.Recipe.findByPk(req.params.recipeID)
-  //     .then(function (recipe) {
-  //       recipe.setIngredients([req.params.ingredientID]).then(function () {
-  //         res.json({});
-  //       });
-  //     });
-  // });
+  ///////////// UPDATE ///////////
 
-  // add ingredient to recipe
- 
+  // Change ingredient "onList" true or false
+  app.put("/api/ingredients/:ingredientID", function (req, res) {
+    db.Ingredient.update({onList: req.body.onList}, { where: { id: req.params.ingredientID} }).then(function (onListUpdate) {
+      res.json(onListUpdate);
+    });
+  });
 
+  // Change recipe "toMake" true or false
+  app.put("/api/recipes/:recipeID", function (req, res) {
+    db.Recipe.update({toMake: req.body.toMake}, { where: { id: req.params.recipeID} }).then(function (toMakeUpdate) {
+      res.json(toMakeUpdate);
+    });
+  });
+
+  // Change recipe name
+  app.put("/api/recipes/:recipeID", function (req, res) {
+    db.Recipe.update({recipeName: req.body.recipeName}, { where: { id: req.params.recipeID} }).then(function (recipeUpdate) {
+      res.json(recipeUpdate);
+    });
+  });
+
+  // Change ingredient name ??
+  app.put("/api/ingredients/:ingredientID", function (req, res) {
+    db.Ingredient.update({ingredient: req.body.ingredient}, { where: { id: req.params.ingredientID} }).then(function (ingredientUpdate) {
+      res.json(ingredientUpdate);
+    });
+  });
+
+
+
+  ///////// DELETE /////////
 
   // Delete a Recipe by id -- THIS WILL DELETE FROM DATABASE -- 
   // Front end should make two buttons - one is to deselect from menu plan, 
@@ -133,3 +150,36 @@ module.exports = function (app) {
 
 
    
+/////////// OLD STUFF ///////////
+// app.post("/api/recipes/:recipeID", function (req, res) {
+//   db.Ingredient.create(req.body).then(function (newIngredient) {
+//     // res.json(NewIngredient);
+//     // req.params.ingredient = NewIngredient.ingredient;
+//     console.log(newIngredient.id);
+//     // db.List.create({ RecipeId: req.params.recipeID, IngredientID: newIngredient.id } )
+//     //   .then(function () {
+//     //     res.json(newIngredient);
+//     //   });
+//   });
+// });
+      
+
+// Create a new Ingredient - insert into Ingredient Table
+// app.post("/api/ingredients", function (req, res) {
+//   db.Ingredient.create(req.body).then(function (NewIngredient) {
+//     res.json(NewIngredient);
+//   });
+// });
+
+// add ingredient to recipe
+// app.post("/api/recipes/:recipeID/ingredients/:ingredientID", function (req, res) {
+//   db.Recipe.findByPk(req.params.recipeID)
+//     .then(function (recipe) {
+//       recipe.setIngredients([req.params.ingredientID]).then(function () {
+//         res.json({});
+//       });
+//     });
+// });
+
+// add ingredient to recipe
+ 

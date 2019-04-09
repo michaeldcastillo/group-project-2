@@ -1,10 +1,4 @@
 module.exports = function(sequelize, DataTypes) {
-  var List = sequelize.define("List", {
-    onList: {
-      type: DataTypes.BOOLEAN,
-      allowNull: false,
-      defaultValue: false
-    }
-  });
+  var List = sequelize.define("List", {});
   return List;
 };
