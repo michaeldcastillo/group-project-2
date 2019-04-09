@@ -20,8 +20,8 @@ describe("GET /api/ingredients", function() {
   it("should find all ingredients", function(done) {
     // Add some examples to the db to test with
     db.Ingredient.bulkCreate([
-      { ingredient: "First ingredient"},
-      { ingredient: "Second ingredient"}
+      { ingredient: "First ingredient" },
+      { ingredient: "Second ingredient" }
     ]).then(function() {
       // Request the route that returns all ingredients
       request.get("/api/ingredients").end(function(err, res) {
@@ -40,11 +40,11 @@ describe("GET /api/ingredients", function() {
 
         expect(responseBody[0])
           .to.be.an("object")
-          .that.includes({ ingredient: "First ingredient"});
+          .that.includes({ ingredient: "First ingredient" });
 
         expect(responseBody[1])
           .to.be.an("object")
-          .that.includes({ ingredient: "Second ingredient"});
+          .that.includes({ ingredient: "Second ingredient" });
 
         // The `done` function is used to end any asynchronous tests
         done();
