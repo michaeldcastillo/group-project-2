@@ -11,11 +11,23 @@ module.exports = function(app) {
     });
   });
 
+  // // Load example page and pass in an example by id
+  // app.get("/recipe/:id", function(req, res) {
+  //   db.Recipe.findOne({ where: { id: req.params.id } }).then(function(
+  //     dbRecipe
+  //   ) {
+  //     res.render("recipe", {
+  //       recipe: dbRecipe
+  //     });
+  //   });
+  // });
+
   // Load example page and pass in an example by id
   app.get("/recipe/:id", function(req, res) {
-    db.Recipe.findOne({ where: { id: req.params.id } }).then(function(
-      dbRecipe
-    ) {
+    db.Recipe.findOne({
+      where: { id: req.params.id },
+      include: [{ model: db.Ingredient }]
+    }).then(function(dbRecipe) {
       res.render("recipe", {
         recipe: dbRecipe
       });

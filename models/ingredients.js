@@ -7,6 +7,20 @@ module.exports = function(sequelize, DataTypes) {
         len: [1, 30]
       }
     },
+    onList: {
+      type: DataTypes.BOOLEAN,
+      defaultValue: false,
+      allowNull: false,
+      set: function(value) {
+        if (value === "true") {
+          value = true;
+        }
+        if (value === "false") {
+          value = false;
+        }
+        this.setDataValue("onList", value);
+      }
+    },
     createdAt: {
       type: DataTypes.DATE
     },

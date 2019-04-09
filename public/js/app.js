@@ -18,13 +18,13 @@ var API = {
       data: JSON.stringify(recipe)
     });
   },
-  saveIngredient: function(ingredient) {
+  saveIngredient: function(ingredient, id) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "/api/recipes/:recipeID/ingredients/" + $ingredientText,
+      url: "/api/recipes/" + id, //I need the recipe ID sent here
       data: JSON.stringify(ingredient)
     });
   },
@@ -34,6 +34,18 @@ var API = {
       type: "GET"
     });
   },
+  getIngredients: function() {
+    return $.ajax({
+      url: "api/ingredients",
+      type: "GET"
+    });
+  },
+  // getRecipeIngredients: function() {
+  //   return $.ajax({
+  //     url: "api/recipes/:recipeID/ingredients",
+  //     type: "GET"
+  //   });
+  // },
   deleteRecipe: function(id) {
     return $.ajax({
       url: "api/recipes/" + id,
@@ -42,6 +54,7 @@ var API = {
   }
 };
 
+// Wondering if this should just be another "GET" ?? Seems like we are going to a strange address here...
 // refreshRecipes gets new examples from the db and repopulates the list
 var refreshRecipes = function() {
   API.getRecipes().then(function(data) {
