@@ -11,6 +11,15 @@ module.exports = function(app) {
     });
   });
 
+  app.get("/shoppinglist", function(req, res) {
+    db.Ingredient.findAll({
+      where: { onList: true }
+    }).then(function(ingredientsList) {
+      res.render("shoppinglist", {
+        shoppingList: ingredientsList
+      });
+    });
+  });
   // // Load example page and pass in an example by id
   // app.get("/recipe/:id", function(req, res) {
   //   db.Recipe.findOne({ where: { id: req.params.id } }).then(function(

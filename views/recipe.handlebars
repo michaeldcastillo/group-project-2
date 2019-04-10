@@ -3,13 +3,13 @@
     <div class="col-8 offset-2">
       <div class="card mt-4">
         <div class="card-body">
-          <h5 class="card-title">Recipe</h5>  
+          <h5 class="card-title"><strong>Recipe</strong>:  {{recipe.recipeName}}</h5>  
           <p>
             <strong>ID</strong>: <span id="recpID">{{recipe.id}}</span></p>
           <p>
-          <p>
-            <strong>Text</strong>: {{recipe.recipeName}}</p>
-          <p>
+          {{!-- <p>
+            <strong>Recipe</strong>: {{recipe.recipeName}}</p>
+          <p> --}}
             <strong>Ingredients:</strong> </p>
             <ul id="ingredient-list" class="list-group">
               {{#each recipe.Ingredients}}
@@ -21,12 +21,12 @@
             </ul>
             <form class="clearfix mb-4">
               <div class="form-group">
-                <label for="recipe-text">Add an ingredient</label>
+                <label for="recipe-text"><strong>Add an ingredient</strong>:</label>
                 <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text" placeholder="Beef">
               </div>
               <button id="submit-ingredient" class="btn btn-primary float-right">Submit</button>
             </form>
-            <a href="/">← Back To Home</a>
+            <a href="/">← Back To Home</a> <a style="float: right" href="/shoppinglist">To Shopping List -></a>
         </div>
       </div>
     </div>

@@ -6,6 +6,7 @@ var $recipeList = $("#recipe-list");
 var $ingredientText = $("#ingredient-text");
 var $submitIngredient = $("#submit-ingredient");
 var $recipeId = $("#recpID");
+var $ingredientList = $("#ingredient-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -15,7 +16,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/recipes",
+      url: "/api/recipes",
       data: JSON.stringify(recipe)
     });
   },
@@ -31,31 +32,32 @@ var API = {
   },
   getRecipes: function() {
     return $.ajax({
-      url: "api/recipes",
+      url: "/api/recipes",
       type: "GET"
     });
   },
   getIngredients: function() {
     return $.ajax({
-      url: "api/ingredients",
+      url: "/api/ingredients",
       type: "GET"
     });
   },
-  // getRecipeIngredients: function() {
-  //   return $.ajax({
-  //     url: "api/recipes/:recipeID/ingredients",
-  //     type: "GET"
-  //   });
-  // },
+
+  getRecipeIngredients: function(recipeid) {
+    return $.ajax({
+      url: "/api/recipes/" + recipeid,
+      type: "GET"
+    });
+  },
+
   deleteRecipe: function(id) {
     return $.ajax({
-      url: "api/recipes/" + id,
+      url: "/api/recipes/" + id,
       type: "DELETE"
     });
   }
 };
 
-// Wondering if this should just be another "GET" ?? Seems like we are going to a strange address here...
 // refreshRecipes gets new examples from the db and repopulates the list
 var refreshRecipes = function() {
   API.getRecipes().then(function(data) {
@@ -82,6 +84,35 @@ var refreshRecipes = function() {
 
     $recipeList.empty();
     $recipeList.append($recipes);
+  });
+};
+
+// refreshRecipes gets new examples from the db and repopulates the list
+var refreshIngredients = function() {
+  var recipeid = $recipeId.text().trim();
+  API.getRecipeIngredients(recipeid).then(function(data) {
+    var $recpIngredients = data[0].Ingredients.map(function(recpIngs) {
+      var $p = $("<p>").text(recpIngs.ingredient);
+      // .attr(recpIngs.id);
+
+      var $li = $("<li>")
+        .attr({
+          class: "list-group-item",
+          "data-id": recpIngs.id
+        })
+        .append($p);
+
+      var $button = $("<button>")
+        .addClass("btn btn-danger float-right delete")
+        .text("ｘ");
+
+      $li.append($button);
+
+      return $li;
+    });
+
+    $ingredientList.empty();
+    $ingredientList.append($recpIngredients);
   });
 };
 
@@ -120,7 +151,7 @@ var handleIngredientSubmit = function(event) {
   }
   console.log(ingredient);
   API.saveIngredient(ingredient, $recipeId.text().trim()).then(function() {
-    refreshRecipes();
+    refreshIngredients();
   });
 
   $recipeText.val("");
