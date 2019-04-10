@@ -4,19 +4,20 @@
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
         <form class="clearfix mb-4">
-          <label for="recipe-option">Select a recipe</label>
+          {{!-- <label for="recipe-option">Select a recipe</label> --}}
           {{!-- <select class="form-control" id="recipe-option">
             <option value="one">One</option>
             <option value="two">Two</option>
             <option value="three">Three</option>
           </select> --}}
           <div class="form-group">
-            <label for="recipe-text">Enter a recipe</label>
+            <label for="recipe-text">Add a new recipe</label>
             <input type="text" id="recipe-text" class="form-control" aria-describedby="recipe-text" placeholder="Burger">
           </div>
           <button id="submit" class="btn btn-primary float-right">Submit</button>
         </form>
         <h3>Cooking this week:</h3>
+        <h6 style="text-align: right">Delete Recipe</h6>
         <ul id="recipe-list" class="list-group">
           {{#each recipes}}
           <li data-id="{{this.id}}" class="list-group-item">
@@ -25,6 +26,7 @@
           </li>
           {{/each}}
         </ul>
+       <a style="float: right" href="/shoppinglist">To Shopping List -></a>
       </div>
     </div>
   </div>
