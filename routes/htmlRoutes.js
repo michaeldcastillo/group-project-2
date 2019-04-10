@@ -26,12 +26,24 @@ module.exports = function(app) {
   app.get("/recipe/:id", function(req, res) {
     db.Recipe.findOne({
       where: { id: req.params.id },
-      include: [{ model: db.Ingredient }]
-    }).then(function(dbRecipe) {
-      res.render("recipe", {
-        recipe: dbRecipe
-      });
-    });
+      include: [
+        {
+          model: db.Ingredient,
+          through: {
+            attributes: ["RecipeId", "IngredientId", "ingredient"]
+          }
+        }
+      ]
+    }).then(
+      function(dbRecipe) {
+        res.render("recipe", {
+          recipe: dbRecipe
+        });
+      },
+      function(err) {
+        console.log(err);
+      }
+    );
   });
 
   // Render 404 page for any unmatched routes

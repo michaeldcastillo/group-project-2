@@ -39,19 +39,18 @@ module.exports = function (app) {
     });
   });
  
-  // Get all ingredients per a recipe
+  // Get all ingredients where "onList" is true
   app.get("/api/shoppinglist", function (req, res) {
     // recipeID = req.params.recipeID;
     db.Ingredient.findAll({
-      include: [{
-        model: db.Recipe,
-        through: {
-          attributes: ["RecipeId", "IngredientId", "onList"],
-          where: {onList: true}
-        }
-      }]
+      // include: [{
+      //   model: db.Recipe,
+      //   through: {
+      //     attributes: ["RecipeId", "IngredientId"],
+      where: {onList: true}
+      //   }
+      // }]
     }).then(function (dbRecipe) {
-      //does this work, or do I need to pull more info from List table here??
       res.json(dbRecipe);
     });
   });
