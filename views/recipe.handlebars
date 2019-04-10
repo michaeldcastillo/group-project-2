@@ -1,16 +1,33 @@
 <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">What's Cookin'</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/views/index.handlebars">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/views/recipe.handlebars">Recipes</a>
+        </li>
+    </div>
+  </nav>
   <div class="row">
     <div class="col-8 offset-2">
       <div class="card mt-4">
         <div class="card-body">
-          <h5 class="card-title">Recipe</h5>  
+          <h5 class="card-title">Recipe</h5>
           <p>
             <strong>ID</strong>: {{recipe.id}}</p>
           <p>
-          <p>
-            <strong>Text</strong>: {{recipe.recipeName}}</p>
-          <p>
-            <strong>Ingredients:</strong> {{recipe.ingredients}}</p>
+            <p>
+              <strong>Text</strong>: {{recipe.recipeName}}</p>
+            <p>
+              <strong>Ingredients:</strong> {{recipe.ingredients}}</p>
             <ul id="ingredient-list" class="list-group">
               {{#each ingredients}}
               <li data-id="{{this.id}}" class="list-group-item">
@@ -22,7 +39,8 @@
             <form class="clearfix mb-4">
               <div class="form-group">
                 <label for="recipe-text">Add an ingredient</label>
-                <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text" placeholder="Beef">
+                <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text"
+                  placeholder="Beef">
               </div>
               <button id="submit-ingredient" class="btn btn-primary float-right">Submit</button>
             </form>
