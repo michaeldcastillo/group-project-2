@@ -1,10 +1,11 @@
 // Get references to page elements
 var $recipeText = $("#recipe-text");
-var $recipeOption = $("#recipe-option").val();
+// var $recipeOption = $("#recipe-option").val();
 var $submitBtn = $("#submit");
 var $recipeList = $("#recipe-list");
 var $ingredientText = $("#ingredient-text");
 var $submitIngredient = $("#submit-ingredient");
+var $recipeId = $("#recpID");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -24,7 +25,7 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "/api/recipes/" + id, //I need the recipe ID sent here
+      url: "/api/recipes/" + id,
       data: JSON.stringify(ingredient)
     });
   },
@@ -103,7 +104,7 @@ var handleFormSubmit = function(event) {
   });
 
   $recipeText.val("");
-  $recipeOption.val("");
+  // $recipeOption.val("");
 };
 
 var handleIngredientSubmit = function(event) {
@@ -118,12 +119,12 @@ var handleIngredientSubmit = function(event) {
     return;
   }
   console.log(ingredient);
-  API.saveIngredient(ingredient).then(function() {
+  API.saveIngredient(ingredient, $recipeId.text().trim()).then(function() {
     refreshRecipes();
   });
 
   $recipeText.val("");
-  $recipeOption.val("");
+  // $recipeOption.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
