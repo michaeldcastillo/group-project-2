@@ -55,6 +55,13 @@ var API = {
       url: "/api/recipes/" + id,
       type: "DELETE"
     });
+  },
+
+  updateList: function(updateList, ingredientID) {
+    return $.ajax({
+      url: "/api/ingredients/" + ingredientID,
+      type: "PUT"
+    });
   }
 };
 
@@ -103,8 +110,12 @@ var refreshIngredients = function() {
         .append($p);
 
       var $button = $("<button>")
-        .addClass("btn btn-danger float-right delete")
-        .text("ｘ");
+        .addClass("btn btn-success float-right addToList")
+        .text("Add to shopping list")
+        .attr({
+          "list-status": recpIngs.onList,
+          "data-id": recpIngs.id
+        });
 
       $li.append($button);
 
@@ -174,3 +185,19 @@ var handleDeleteBtnClick = function() {
 $submitBtn.on("click", handleFormSubmit);
 $submitIngredient.on("click", handleIngredientSubmit);
 $recipeList.on("click", ".delete", handleDeleteBtnClick);
+
+$(".addToList").on("click", function() {
+  console.log("button clicked");
+  // var state = $(this).attr("list-status");
+  var buttonID = $(this).attr("data-id");
+  console.log(buttonID);
+  // if (state === "false") {
+  //   console.log("we made it");
+  var updateList = {
+    onList: "true"
+  };
+  // $(this).attr("list-status", "true");
+  API.updateList(updateList, buttonID).then(function() {
+    refreshIngredients();
+  });
+});
