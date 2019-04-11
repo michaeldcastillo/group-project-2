@@ -122,11 +122,11 @@ module.exports = function (app) {
   });
 
   // Change ingredient name ??
-  app.put("/api/ingredients/:ingredientID", function (req, res) {
-    db.Ingredient.update({ingredient: req.body.ingredient}, { where: { id: req.params.ingredientID} }).then(function (ingredientUpdate) {
-      res.json(ingredientUpdate);
-    });
-  });
+  // app.put("/api/ingredients/:ingredientID", function (req, res) {
+  //   db.Ingredient.update({ingredient: req.body.ingredient}, { where: { id: req.params.ingredientID} }).then(function (ingredientUpdate) {
+  //     res.json(ingredientUpdate);
+  //   });
+  // });
 
 
 

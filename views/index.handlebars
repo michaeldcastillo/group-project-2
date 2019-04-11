@@ -1,15 +1,26 @@
 <div id="home">
   <div class="container">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="#">What's Cookin'</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link" href="/views/index.handlebars">Home <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="/views/recipe.handlebars">Recipes</a>
+          </li>
+      </div>
+    </nav>
     <div class="row">
       <div class="col-8 offset-2">
         <h1>{{msg}}</h1>
         <form class="clearfix mb-4">
-          {{!-- <label for="recipe-option">Select a recipe</label> --}}
-          {{!-- <select class="form-control" id="recipe-option">
-            <option value="one">One</option>
-            <option value="two">Two</option>
-            <option value="three">Three</option>
-          </select> --}}
           <div class="form-group">
             <label for="recipe-text">Add a new recipe</label>
             <input type="text" id="recipe-text" class="form-control" aria-describedby="recipe-text" placeholder="Burger">
@@ -33,4 +44,8 @@
 </div>
 
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script
+			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+			  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
+			  crossorigin="anonymous"></script>
 <script src="/js/app.js"></script>
