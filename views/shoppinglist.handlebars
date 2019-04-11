@@ -14,7 +14,7 @@
             <ul id="ingredient-list" class="list-group">
               {{#each shoppingList}}
               <li class="list-group-item" style="padding:0rem 1.25rem;">
-                <p style="margin-bottom:0;">{{this.ingredient}}</a>
+                <p  data-state="{{this.onList}}" style="margin-bottom:0;">{{this.ingredient}}</a>
               </li>
               {{/each}}
             </ul>

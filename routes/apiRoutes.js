@@ -101,25 +101,26 @@ module.exports = function (app) {
 
   // Change ingredient "onList" true or false
   app.put("/api/ingredients/:ingredientID", function (req, res) {
-    console.log(req.body.onList);
+    console.log("req" + req.body.onList);
+    // console.log("dot body" + req.body);
     db.Ingredient.update({onList: req.body.onList}, { where: {id: req.params.ingredientID} }).then(function (onListUpdate) {
       res.json(onListUpdate);
     });
   });
 
-  // Change recipe "toMake" true or false
-  app.put("/api/recipes/:recipeID", function (req, res) {
-    db.Recipe.update({toMake: req.body.toMake}, { where: { id: req.params.recipeID} }).then(function (toMakeUpdate) {
-      res.json(toMakeUpdate);
-    });
-  });
+  // // Change recipe "toMake" true or false
+  // app.put("/api/recipes/:recipeID", function (req, res) {
+  //   db.Recipe.update({toMake: req.body.toMake}, { where: { id: req.params.recipeID} }).then(function (toMakeUpdate) {
+  //     res.json(toMakeUpdate);
+  //   });
+  // });
 
-  // Change recipe name
-  app.put("/api/recipes/:recipeID", function (req, res) {
-    db.Recipe.update({recipeName: req.body.recipeName}, { where: { id: req.params.recipeID} }).then(function (recipeUpdate) {
-      res.json(recipeUpdate);
-    });
-  });
+  // // Change recipe name
+  // app.put("/api/recipes/:recipeID", function (req, res) {
+  //   db.Recipe.update({recipeName: req.body.recipeName}, { where: { id: req.params.recipeID} }).then(function (recipeUpdate) {
+  //     res.json(recipeUpdate);
+  //   });
+  // });
 
   // Change ingredient name ??
   // app.put("/api/ingredients/:ingredientID", function (req, res) {
