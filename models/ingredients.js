@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
     },
     onList: {
       type: DataTypes.BOOLEAN,
-      defaultValue: true,
+      defaultValue: false,
       allowNull: false,
       set: function(value) {
         if (value === "true") {

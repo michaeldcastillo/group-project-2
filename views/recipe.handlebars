@@ -20,55 +20,40 @@
     <div class="col-8 offset-2">
       <div class="card mt-4">
         <div class="card-body">
-<<<<<<< HEAD
-          <h5 class="card-title">Recipe</h5>
-=======
-          <h5 class="card-title"><strong>Recipe</strong>:  {{recipe.recipeName}}</h5>  
->>>>>>> cada6594c6dd8c7ae897a9eac63429a09a4b3f22
+          <h5 class="card-title"><strong>Recipe</strong>: {{recipe.recipeName}}</h5>
           <p>
             <strong>ID</strong>: <span id="recpID">{{recipe.id}}</span></p>
           <p>
-<<<<<<< HEAD
-            <p>
-              <strong>Text</strong>: {{recipe.recipeName}}</p>
-            <p>
-              <strong>Ingredients:</strong> {{recipe.ingredients}}</p>
-=======
-          {{!-- <p>
+            {{!-- <p>
             <strong>Recipe</strong>: {{recipe.recipeName}}</p>
           <p> --}}
-            <strong>Ingredients:</strong> </p>
->>>>>>> cada6594c6dd8c7ae897a9eac63429a09a4b3f22
-            <ul id="ingredient-list" class="list-group">
-              {{#each recipe.Ingredients}}
-              <li class="list-group-item">
-                <p>{{this.ingredient}}</a>
-                <button data-id="{{this.id}}" class="btn btn-danger float-right delete">ｘ</button>
-              </li>
-              {{/each}}
-            </ul>
             <form class="clearfix mb-4">
               <div class="form-group">
-<<<<<<< HEAD
-                <label for="recipe-text">Add an ingredient</label>
+                <label for="recipe-text"><strong>Add an ingredient</strong>:</label>
                 <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text"
                   placeholder="Beef">
-=======
-                <label for="recipe-text"><strong>Add an ingredient</strong>:</label>
-                <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text" placeholder="Beef">
->>>>>>> cada6594c6dd8c7ae897a9eac63429a09a4b3f22
               </div>
               <button id="submit-ingredient" class="btn btn-primary float-right">Submit</button>
             </form>
-            <a href="/">← Back To Home</a> <a style="float: right" href="/shoppinglist">To Shopping List -></a>
+
+            <strong>Ingredients:</strong> </p>
+          <ul id="ingredient-list" class="list-group">
+            {{#each recipe.Ingredients}}
+            <li class="list-group-item">
+              <p>{{this.ingredient}}</p>
+              <button data-id="{{this.id}}" class="btn btn-success float-right addToList">Add to shopping list</button>
+            </li>
+            {{/each}}
+          </ul>
+
+          <a href="/">← Back To Home</a> <a style="float: right" href="/shoppinglist">To Shopping List -></a>
         </div>
       </div>
     </div>
   </div>
-<<<<<<< HEAD
 </div>
-=======
-</div>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 <script src="/js/app.js"></script>
->>>>>>> cada6594c6dd8c7ae897a9eac63429a09a4b3f22
