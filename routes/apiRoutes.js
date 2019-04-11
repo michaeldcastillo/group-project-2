@@ -101,7 +101,8 @@ module.exports = function (app) {
 
   // Change ingredient "onList" true or false
   app.put("/api/ingredients/:ingredientID", function (req, res) {
-    db.Ingredient.update({onList: req.body.onList}, { where: { id: req.params.ingredientID} }).then(function (onListUpdate) {
+    console.log(req.body.onList);
+    db.Ingredient.update({onList: req.body.onList}, { where: {id: req.params.ingredientID} }).then(function (onListUpdate) {
       res.json(onListUpdate);
     });
   });
