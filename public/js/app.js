@@ -6,7 +6,7 @@ var $recipeList = $("#recipe-list");
 var $ingredientText = $("#ingredient-text");
 var $submitIngredient = $("#submit-ingredient");
 var $recipeId = $("#recpID");
-var $ingredientList = $("#ingredient-list");
+// var $ingredientList = $("#ingredient-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
