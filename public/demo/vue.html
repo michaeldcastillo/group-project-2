@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Demo Vue.js</title>
+</head>
+<body>
+
+    <!-- Example #1 -->
+    <h2>Example 1</h2>
+    <div id="app">
+    <!-- with this elemtn of id that matches the Vue instance, reference the data object -->
+        <h3>{{ food }} </h3>
+    </div>
+
+    <!-- Example #2 -->
+    <h2>Example 2</h2>
+    <div id="app2">
+        <ul>
+            <li>{{ ingredients }}</li>
+        </ul>
+    <!-- now use a for loop construct in Vue to display all ingredients in the array...
+    NOTE: you must use the singular term for the key ('ingredient' NOT 'ingredients') to reference individual items in the array -->
+        <ul>
+            <li v-for="ingredient in ingredients">{{ ingredient }}</li>
+        </ul>
+    </div>
+
+    <!-- Example #3 -->
+    <h2>Example 3 (Open browser console to view CORS error)</h2>
+    <div id="app3">
+        <ul>
+            <li>{{ ingredients }}</li>
+        </ul>
+     </div>
+
+    <script src="https://unpkg.com/vue"></script>
+    <script>
+
+        /* Example #1 */ 
+        //create new Vue instance and pass in an object with an element (el) key that matches the id of some element on the page
+        //and a data key with some data where the value is another object
+        const app = new Vue({ el: "#app", data: { food: "Hamburger" }});
+        //vue is "reactive" meaning when our data changes, vue takes care of updating it in all the places its being used
+        //change data
+        app.food = "Pizza";
+
+        /* Example #2 */ 
+        //now setup data as an object but with an array of values inside
+        const app2 = new Vue({ el: "#app2", data: { ingredients: ["Cheese","Pepperoni","Mushroom","Sauce","Dough"] } });
+
+        /* Example #3 */ 
+        //now setup data as an object but with an empty array that will populate from an API GET request
+        const app3 = new Vue({ el: "#app3", data: { ingredients: [] }, created() { console.log("there is a CORS problem with the fetch");
+            fetch("http://localhost:8080/api/recipes").then(response => response.json()).then(json => {
+                console.log("where are we now?");
+                this.ingredients = json.ingredients;
+            });
+        } });
+
+
+
+
+
+
+
+
+    </script>
+
+    
+</body>
+</html>

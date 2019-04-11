@@ -20,33 +20,55 @@
     <div class="col-8 offset-2">
       <div class="card mt-4">
         <div class="card-body">
+<<<<<<< HEAD
           <h5 class="card-title">Recipe</h5>
+=======
+          <h5 class="card-title"><strong>Recipe</strong>:  {{recipe.recipeName}}</h5>  
+>>>>>>> cada6594c6dd8c7ae897a9eac63429a09a4b3f22
           <p>
-            <strong>ID</strong>: {{recipe.id}}</p>
+            <strong>ID</strong>: <span id="recpID">{{recipe.id}}</span></p>
           <p>
+<<<<<<< HEAD
             <p>
               <strong>Text</strong>: {{recipe.recipeName}}</p>
             <p>
               <strong>Ingredients:</strong> {{recipe.ingredients}}</p>
+=======
+          {{!-- <p>
+            <strong>Recipe</strong>: {{recipe.recipeName}}</p>
+          <p> --}}
+            <strong>Ingredients:</strong> </p>
+>>>>>>> cada6594c6dd8c7ae897a9eac63429a09a4b3f22
             <ul id="ingredient-list" class="list-group">
-              {{#each ingredients}}
-              <li data-id="{{this.id}}" class="list-group-item">
-                <a href="recipe/{{this.id}}">{{this.ingredient}}</a>
-                <button class="btn btn-danger float-right delete">ｘ</button>
+              {{#each recipe.Ingredients}}
+              <li class="list-group-item">
+                <p>{{this.ingredient}}</a>
+                <button data-id="{{this.id}}" class="btn btn-danger float-right delete">ｘ</button>
               </li>
               {{/each}}
             </ul>
             <form class="clearfix mb-4">
               <div class="form-group">
+<<<<<<< HEAD
                 <label for="recipe-text">Add an ingredient</label>
                 <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text"
                   placeholder="Beef">
+=======
+                <label for="recipe-text"><strong>Add an ingredient</strong>:</label>
+                <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text" placeholder="Beef">
+>>>>>>> cada6594c6dd8c7ae897a9eac63429a09a4b3f22
               </div>
               <button id="submit-ingredient" class="btn btn-primary float-right">Submit</button>
             </form>
-            <a href="/">← Back To Home</a>
+            <a href="/">← Back To Home</a> <a style="float: right" href="/shoppinglist">To Shopping List -></a>
         </div>
       </div>
     </div>
   </div>
+<<<<<<< HEAD
 </div>
+=======
+</div>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="/js/app.js"></script>
+>>>>>>> cada6594c6dd8c7ae897a9eac63429a09a4b3f22

@@ -1,10 +1,12 @@
 // Get references to page elements
 var $recipeText = $("#recipe-text");
-var $recipeOption = $("#recipe-option").val();
+// var $recipeOption = $("#recipe-option").val();
 var $submitBtn = $("#submit");
 var $recipeList = $("#recipe-list");
 var $ingredientText = $("#ingredient-text");
 var $submitIngredient = $("#submit-ingredient");
+var $recipeId = $("#recpID");
+var $ingredientList = $("#ingredient-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -14,29 +16,43 @@ var API = {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "api/recipes",
+      url: "/api/recipes",
       data: JSON.stringify(recipe)
     });
   },
-  saveIngredient: function(ingredient) {
+  saveIngredient: function(ingredient, id) {
     return $.ajax({
       headers: {
         "Content-Type": "application/json"
       },
       type: "POST",
-      url: "/api/recipes/:recipeID/ingredients/" + $ingredientText,
+      url: "/api/recipes/" + id,
       data: JSON.stringify(ingredient)
     });
   },
   getRecipes: function() {
     return $.ajax({
-      url: "api/recipes",
+      url: "/api/recipes",
       type: "GET"
     });
   },
+  getIngredients: function() {
+    return $.ajax({
+      url: "/api/ingredients",
+      type: "GET"
+    });
+  },
+
+  getRecipeIngredients: function(recipeid) {
+    return $.ajax({
+      url: "/api/recipes/" + recipeid,
+      type: "GET"
+    });
+  },
+
   deleteRecipe: function(id) {
     return $.ajax({
-      url: "api/recipes/" + id,
+      url: "/api/recipes/" + id,
       type: "DELETE"
     });
   }
@@ -71,6 +87,35 @@ var refreshRecipes = function() {
   });
 };
 
+// refreshRecipes gets new examples from the db and repopulates the list
+var refreshIngredients = function() {
+  var recipeid = $recipeId.text().trim();
+  API.getRecipeIngredients(recipeid).then(function(data) {
+    var $recpIngredients = data[0].Ingredients.map(function(recpIngs) {
+      var $p = $("<p>").text(recpIngs.ingredient);
+      // .attr(recpIngs.id);
+
+      var $li = $("<li>")
+        .attr({
+          class: "list-group-item",
+          "data-id": recpIngs.id
+        })
+        .append($p);
+
+      var $button = $("<button>")
+        .addClass("btn btn-danger float-right delete")
+        .text("ｘ");
+
+      $li.append($button);
+
+      return $li;
+    });
+
+    $ingredientList.empty();
+    $ingredientList.append($recpIngredients);
+  });
+};
+
 // handleFormSubmit is called whenever we submit a new example
 // Save the new example to the db and refresh the list
 var handleFormSubmit = function(event) {
@@ -90,7 +135,7 @@ var handleFormSubmit = function(event) {
   });
 
   $recipeText.val("");
-  $recipeOption.val("");
+  // $recipeOption.val("");
 };
 
 var handleIngredientSubmit = function(event) {
@@ -105,12 +150,12 @@ var handleIngredientSubmit = function(event) {
     return;
   }
   console.log(ingredient);
-  API.saveIngredient(ingredient).then(function() {
-    refreshRecipes();
+  API.saveIngredient(ingredient, $recipeId.text().trim()).then(function() {
+    refreshIngredients();
   });
 
   $recipeText.val("");
-  $recipeOption.val("");
+  // $recipeOption.val("");
 };
 
 // handleDeleteBtnClick is called when an example's delete button is clicked
