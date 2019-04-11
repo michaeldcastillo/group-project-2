@@ -6,7 +6,7 @@ var $recipeList = $("#recipe-list");
 var $ingredientText = $("#ingredient-text");
 var $submitIngredient = $("#submit-ingredient");
 var $recipeId = $("#recpID");
-var $ingredientList = $("#ingredient-list");
+// var $ingredientList = $("#ingredient-list");
 
 // The API object contains methods for each kind of request we'll make
 var API = {
@@ -57,10 +57,17 @@ var API = {
     });
   },
 
-  updateList: function(updateList, ingredientID) {
+  updateList: function(newState, buttonID) {
     return $.ajax({
-      url: "/api/ingredients/" + ingredientID,
-      type: "PUT"
+      //   url: "/api/ingredients/" + buttonID,
+      //   type: "PUT"
+      // });
+      headers: {
+        "Content-Type": "application/json"
+      },
+      url: "/api/ingredients/" + buttonID,
+      type: "PUT",
+      data: JSON.stringify(newState)
     });
   }
 };
@@ -96,35 +103,37 @@ var refreshRecipes = function() {
 
 // refreshRecipes gets new examples from the db and repopulates the list
 var refreshIngredients = function() {
-  var recipeid = $recipeId.text().trim();
-  API.getRecipeIngredients(recipeid).then(function(data) {
-    var $recpIngredients = data[0].Ingredients.map(function(recpIngs) {
-      var $p = $("<p>").text(recpIngs.ingredient);
-      // .attr(recpIngs.id);
+  location.reload();
+  // var recipeid = $recipeId.text().trim();
+  // API.getRecipeIngredients(recipeid).then(function(data) {
+  //   var $recpIngredients = data[0].Ingredients.map(function(recpIngs) {
+  //     var $p = $("<p>").text(recpIngs.ingredient);
+  //     // .attr(recpIngs.id);
 
-      var $li = $("<li>")
-        .attr({
-          class: "list-group-item",
-          "data-id": recpIngs.id
-        })
-        .append($p);
+  //     var $li = $("<li>")
+  //       .attr({
+  //         class: "list-group-item"
+  //         // "data-id": recpIngs.id
+  //       })
+  //       .append($p);
 
-      var $button = $("<button>")
-        .addClass("btn btn-success float-right addToList")
-        .text("Add to shopping list")
-        .attr({
-          "list-status": recpIngs.onList,
-          "data-id": recpIngs.id
-        });
+  //     var $button = $("<button>")
+  //       .addClass("btn btn-success float-right addToList")
+  //       .text("Add to shopping list")
+  //       .attr({
+  //         id: "listbtn",
+  //         "data-state": recpIngs.onList,
+  //         "data-id": recpIngs.id
+  //       });
 
-      $li.append($button);
+  //     $li.append($button);
 
-      return $li;
-    });
+  //     return $li;
+  //   });
 
-    $ingredientList.empty();
-    $ingredientList.append($recpIngredients);
-  });
+  //   $ingredientList.empty();
+  //   $ingredientList.append($recpIngredients);
+  // });
 };
 
 // handleFormSubmit is called whenever we submit a new example
@@ -186,18 +195,29 @@ $submitBtn.on("click", handleFormSubmit);
 $submitIngredient.on("click", handleIngredientSubmit);
 $recipeList.on("click", ".delete", handleDeleteBtnClick);
 
-$(".addToList").on("click", function() {
+$(".btn.onList").on("click", function() {
   console.log("button clicked");
   // var state = $(this).attr("list-status");
   var buttonID = $(this).attr("data-id");
   console.log(buttonID);
-  // if (state === "false") {
-  //   console.log("we made it");
-  var updateList = {
-    onList: "true"
-  };
-  // $(this).attr("list-status", "true");
-  API.updateList(updateList, buttonID).then(function() {
-    refreshIngredients();
-  });
+  console.log($(this).attr("data-state"));
+  if ($(this).attr("data-state") === "false") {
+    console.log("changing false to true");
+    var newState = {
+      onList: "true"
+    };
+    // $(this).attr("data-state", "true");
+    API.updateList(newState, buttonID).then(function() {
+      refreshIngredients();
+    });
+  } else {
+    console.log("changing true to false");
+    var newState = {
+      onList: "false"
+    };
+    // $(this).attr("data-state", "false");
+    API.updateList(newState, buttonID).then(function() {
+      refreshIngredients();
+    });
+  }
 });

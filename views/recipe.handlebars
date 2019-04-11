@@ -39,9 +39,9 @@
             <strong>Ingredients:</strong> </p>
           <ul id="ingredient-list" class="list-group">
             {{#each recipe.Ingredients}}
-            <li class="list-group-item">
-              <p>{{this.ingredient}}</p>
-              <button data-id="{{this.id}}" class="btn btn-success float-right addToList">Add to shopping list</button>
+            <li class="list-group-item">{{this.ingredient}}
+              {{!-- <p></p> --}}
+              <button data-id="{{this.id}}" data-state="{{this.onList}}" class="btn btn-success float-right onList">Add to shopping list</button>
             </li>
             {{/each}}
           </ul>
