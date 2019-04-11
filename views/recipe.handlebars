@@ -41,7 +41,7 @@
             {{#each recipe.Ingredients}}
             <li class="list-group-item">{{this.ingredient}}
               {{!-- <p></p> --}}
-              <button id="listbtn" data-id="{{this.id}}" data-state="{{this.onList}}" class="btn btn-success float-right">Add to shopping list</button>
+              <button data-id="{{this.id}}" data-state="{{this.onList}}" class="btn btn-success float-right onList">Add to shopping list</button>
             </li>
             {{/each}}
           </ul>

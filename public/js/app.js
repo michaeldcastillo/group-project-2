@@ -195,7 +195,7 @@ $submitBtn.on("click", handleFormSubmit);
 $submitIngredient.on("click", handleIngredientSubmit);
 $recipeList.on("click", ".delete", handleDeleteBtnClick);
 
-$("#listbtn").on("click", function() {
+$(".btn.onList").on("click", function() {
   console.log("button clicked");
   // var state = $(this).attr("list-status");
   var buttonID = $(this).attr("data-id");
