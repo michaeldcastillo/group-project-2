@@ -1,7 +1,7 @@
 /* eslint-disable quotes */
 // Get references to page elements
 var $recipeText = $("#recipe-text");
-// var $recipeOption = $("#recipe-option").val();
+// var $recipeOption = $("#recipe-option").val(); // didn't get around to this functionality...
 var $submitBtn = $("#submit");
 var $recipeList = $("#recipe-list");
 var $ingredientText = $("#ingredient-text");
@@ -109,12 +109,10 @@ var refreshIngredients = function() {
   API.getRecipeIngredients(recipeid).then(function(data) {
     var $recpIngredients = data[0].Ingredients.map(function(recpIngs) {
       var $p = $("<p>").text(recpIngs.ingredient);
-      // .attr(recpIngs.id);
 
       var $li = $("<li>")
         .attr({
           class: "list-group-item"
-          // "data-id": recpIngs.id
         })
         .append($p);
 
@@ -187,6 +185,10 @@ var handleFormSubmit = function(event) {
   // $recipeOption.val("");
 };
 
+var refreshShoppingList = function() {
+  console.log("here is where we referesh!");
+};
+
 var handleIngredientSubmit = function(event) {
   event.preventDefault();
 
@@ -224,7 +226,7 @@ $submitBtn.on("click", handleFormSubmit);
 $submitIngredient.on("click", handleIngredientSubmit);
 $recipeList.on("click", ".delete", handleDeleteBtnClick);
 
-function bindCheckboxClickHanders() {
+function bindCheckboxClickHanders(refreshFunction) {
   $(".btn.onList").on("click", function() {
     console.log("button clicked");
     // var state = $(this).attr("list-status");
@@ -238,7 +240,7 @@ function bindCheckboxClickHanders() {
       };
       // $(this).attr("data-state", "true");
       API.updateList(newState, buttonID).then(function() {
-        refreshIngredients();
+        refreshFunction();
       });
     } else {
       console.log("changing true to false");
@@ -247,10 +249,14 @@ function bindCheckboxClickHanders() {
       };
       // $(this).attr("data-state", "false");
       API.updateList(newState, buttonID).then(function() {
-        refreshIngredients();
+        refreshFunction();
       });
     }
   });
 }
 
-bindCheckboxClickHanders();
+if ($recipeId.text().trim()) {
+  bindCheckboxClickHanders(refreshIngredients);
+} else {
+  bindCheckboxClickHanders(refreshShoppingList);
+}

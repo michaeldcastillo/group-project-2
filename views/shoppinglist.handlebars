@@ -12,9 +12,6 @@
           <li class="nav-item active">
             <a class="nav-link" href="/">Home</a> 
           </li>
-          {{!-- <li class="nav-item">
-            <a class="nav-link" href="/shoppinglist">Shopping List</a>
-          </li> --}}
       </div>
     </nav>
   <div class="row">
@@ -31,7 +28,6 @@
             <ul id="ingredient-list" class="list-group">
               {{#each shoppingList}}
               <li class="list-group-item" style="padding:0rem 1.25rem; margin-bottom: .25rem;">{{this.ingredient}}
-                {{!-- <p data-state="{{this.onList}}" style="margin-bottom:0;">{{this.ingredient}}</p> --}}
                 {{#if this.onList}}
                 <button data-id="{{this.id}}" data-state="{{this.onList}}" class="btn btn-success float-right onList"><i class="far fa-check-square"></i></button>
               {{else}}
