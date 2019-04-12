@@ -2,11 +2,20 @@
   line-height: 2.5;
 }
 
+
+body {
+  padding-top: 55px;
+}
+
+#top-img {
+  max-width: 10%;
+  height: auto;
+}
+
 body, html {
   height: 100%;
   font-family: "Inconsolata", sans-serif;
-  
-}
+  }
 
 .bgimg {
   background-position: center;
