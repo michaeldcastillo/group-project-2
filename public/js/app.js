@@ -159,7 +159,7 @@ var refreshIngredients = function() {
 
     $ingredientList.empty();
     $ingredientList.append($recpIngredients);
-    bindCheckboxClickHanders();
+    bindCheckboxClickHanders(refreshIngredients);
   });
 };
 
@@ -255,8 +255,4 @@ function bindCheckboxClickHanders(refreshFunction) {
   });
 }
 
-if ($recipeId.text().trim()) {
-  bindCheckboxClickHanders(refreshIngredients);
-} else {
-  bindCheckboxClickHanders(refreshShoppingList);
-}
+bindCheckboxClickHanders(refreshIngredients);
