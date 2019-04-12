@@ -1,0 +1,11 @@
+<h3>Cooking this week:</h3>
+<h6 style="text-align: right">Delete Recipe</h6>
+<ul id="recipe-list" class="list-group">
+    {{#each recipes}}
+    <li data-id="{{this.id}}" style="padding:0rem 1.25rem; margin-bottom: .25rem;" class="list-group-item">
+        <a href="recipe/{{this.id}}">{{this.recipeName}}</a>
+        <button class="btn btn-danger float-right delete">ｘ</button>
+    </li>
+    {{/each}}
+</ul>
+<br>

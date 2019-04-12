@@ -1,72 +1,17 @@
 <img src="https://media.giphy.com/media/3ohhwerD13QMADpFlu/giphy.gif" class="float-left" id="top-img">
 <div id="home">
   <div class="container">
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">What's Cookin'</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-          </li>
-          <li class="nav-item active">
-            <a class="nav-link" href="/shoppinglist">Shopping List</a>
-          </li>
-      </div>
-    </nav>
     <div class="row">
       <div class="col-8 offset-2">
+        
+        {{> title }}
 
-        <br>
-        <h1 style="text-align: center; font-family: 'Gloria Hallelujah', cursive;"> {{msg}} </h1>
-        <br>
-       
-        <h4>Cooking this week:</h4>
-        <h6 style="text-align: right">Delete Recipe:</h6>
+        {{> this-week }}
 
-        {{!-- <h1>{{msg}}</h1> --}}
-        <form class="clearfix mb-4">
-          <div class="form-group">
-            <label for="recipe-text">Add a new recipe</label>
-            <input type="text" id="recipe-text" class="form-control" aria-describedby="recipe-text" placeholder="Burger">
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Cooking this week:</h3>
-        <h6 style="text-align: right">Delete Recipe</h6>
+        {{> add-recipe }}
 
-        <ul id="recipe-list" class="list-group">
-          {{#each recipes}}
-          <li data-id="{{this.id}}"  style="padding:0rem 1.25rem; margin-bottom: .25rem;" class="list-group-item">
-            <a href="recipe/{{this.id}}">{{this.recipeName}}</a>
-            <button class="btn btn-danger float-right delete">ｘ</button>
-          </li>
-          {{/each}}
-        </ul>
-        <br>
-        <br>
-         <form class="clearfix mb-4">
-          <div class="form-group">
-            <h5>Add a new recipe:</h5>
-            <label for="recipe-text"></label>
-            <input type="text" id="recipe-text" class="form-control" aria-describedby="recipe-text" placeholder="Burger">
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <br>
        <a style="float: right" href="/shoppinglist">To Shopping List &#8594;</a>
       </div>
     </div>
   </div>
 </div>
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script
-			  src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
-			  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30="
-			  crossorigin="anonymous"></script>
-<script src="/js/app.js"></script>
