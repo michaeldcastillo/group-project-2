@@ -10,34 +10,41 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item active">
-            <a class="nav-link" href="/views/index.handlebars">Home <span class="sr-only">(current)</span></a>
+            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="/views/recipe.handlebars">Recipes</a>
+          <li class="nav-item active">
+            <a class="nav-link" href="/shoppinglist">Shopping List</a>
           </li>
       </div>
     </nav>
     <div class="row">
       <div class="col-8 offset-2">
-        <h1>{{msg}}</h1>
-        <form class="clearfix mb-4">
-          <div class="form-group">
-            <label for="recipe-text">Add a new recipe</label>
-            <input type="text" id="recipe-text" class="form-control" aria-describedby="recipe-text" placeholder="Burger">
-          </div>
-          <button id="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
-        <h3>Cooking this week:</h3>
-        <h6 style="text-align: right">Delete Recipe</h6>
+        <br>
+        <h1 style="text-align: center; font-family: 'Gloria Hallelujah', cursive;"> {{msg}} </h1>
+        <br>
+       
+        <h4>Cooking this week:</h4>
+        <h6 style="text-align: right">Delete Recipe:</h6>
         <ul id="recipe-list" class="list-group">
           {{#each recipes}}
-          <li data-id="{{this.id}}" class="list-group-item">
+          <li data-id="{{this.id}}"  style="padding:0rem 1.25rem; margin-bottom: .25rem;" class="list-group-item">
             <a href="recipe/{{this.id}}">{{this.recipeName}}</a>
             <button class="btn btn-danger float-right delete">ｘ</button>
           </li>
           {{/each}}
         </ul>
-       <a style="float: right" href="/shoppinglist">To Shopping List -></a>
+        <br>
+        <br>
+         <form class="clearfix mb-4">
+          <div class="form-group">
+            <h5>Add a new recipe:</h5>
+            <label for="recipe-text"></label>
+            <input type="text" id="recipe-text" class="form-control" aria-describedby="recipe-text" placeholder="Burger">
+          </div>
+          <button id="submit" class="btn btn-primary float-right">Submit</button>
+        </form>
+        <br>
+       <a style="float: right" href="/shoppinglist">To Shopping List &#8594;</a>
       </div>
     </div>
   </div>
