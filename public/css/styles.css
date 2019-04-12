@@ -5,6 +5,10 @@
 
 body {
   padding-top: 55px;
+  background-image: url("../images/avocado-cherry-tomatoes-chopping-board-1166419.jpg");
+  background-size:     cover;                      /* <------ */
+  background-repeat:   no-repeat;
+  background-position: center center;
 }
 
 #top-img {
@@ -26,4 +30,8 @@ body, html {
 
 p {
   display: inline;
+}
+
+.card-body {
+  background-color: #ffffff;
 }
