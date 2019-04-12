@@ -1,36 +1,59 @@
 <div class="container">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">What's Cookin'</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="/views/index.handlebars">Home <span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="/views/recipe.handlebars">Recipes</a>
+        </li>
+    </div>
+  </nav>
   <div class="row">
     <div class="col-8 offset-2">
       <div class="card mt-4">
         <div class="card-body">
-          <h5 class="card-title"><strong>Recipe</strong>:  {{recipe.recipeName}}</h5>  
+          <h5 class="card-title"><strong>Recipe</strong>: {{recipe.recipeName}}</h5>
           <p>
             <strong>ID</strong>: <span id="recpID">{{recipe.id}}</span></p>
           <p>
-          {{!-- <p>
+            {{!-- <p>
             <strong>Recipe</strong>: {{recipe.recipeName}}</p>
           <p> --}}
-            <strong>Ingredients:</strong> </p>
-            <ul id="ingredient-list" class="list-group">
-              {{#each recipe.Ingredients}}
-              <li class="list-group-item">
-                <p>{{this.ingredient}}</a>
-                <button data-id="{{this.id}}" class="btn btn-danger float-right delete">ｘ</button>
-              </li>
-              {{/each}}
-            </ul>
             <form class="clearfix mb-4">
               <div class="form-group">
                 <label for="recipe-text"><strong>Add an ingredient</strong>:</label>
-                <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text" placeholder="Beef">
+                <input type="text" id="ingredient-text" class="form-control" aria-describedby="ingredient-text"
+                  placeholder="Beef">
               </div>
               <button id="submit-ingredient" class="btn btn-primary float-right">Submit</button>
             </form>
-            <a href="/">← Back To Home</a> <a style="float: right" href="/shoppinglist">To Shopping List -></a>
+
+            <strong>Ingredients:</strong> </p>
+          <ul id="ingredient-list" class="list-group">
+            {{#each recipe.Ingredients}}
+            <li class="list-group-item">{{this.ingredient}}
+              {{!-- <p></p> --}}
+              <button data-id="{{this.id}}" data-state="{{this.onList}}" class="btn btn-success float-right onList">Add to shopping list</button>
+            </li>
+            {{/each}}
+          </ul>
+
+          <a href="/">← Back To Home</a> <a style="float: right" href="/shoppinglist">To Shopping List -></a>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"
+  integrity="sha256-T0Vest3yCU7pafRw9r+settMBX6JkKN06dqBnpQ8d30=" crossorigin="anonymous"></script>
 <script src="/js/app.js"></script>
