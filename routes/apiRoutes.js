@@ -34,22 +34,14 @@ module.exports = function (app) {
         }
       }]
     }).then(function (dbRecipe) {
-      //does this work, or do I need to pull more info from List table here??
       res.json(dbRecipe);
     });
   });
  
   // Get all ingredients where "onList" is true
   app.get("/api/shoppinglist", function (req, res) {
-    // recipeID = req.params.recipeID;
     db.Ingredient.findAll({
-      // include: [{
-      //   model: db.Recipe,
-      //   through: {
-      //     attributes: ["RecipeId", "IngredientId"],
       where: {onList: true}
-      //   }
-      // }]
     }).then(function (dbRecipe) {
       res.json(dbRecipe);
     });
@@ -71,10 +63,10 @@ module.exports = function (app) {
     // console.log(ingredient);
     db.Ingredient.findOne({ where: {ingredient: ingredient } }).then(function(response) {
       console.log("Hi");
-      if (response) {
+      if (response) { //checking to see if there is this ingredient already in the database
         var ingredientID = response.id;
         console.log(ingredientID);
-        db.Recipe.findOne({ where: { id: req.params.recipeID } })
+        db.Recipe.findOne({ where: { id: req.params.recipeID } }) // if so, go ahead and join the ingredient to the recipe
           .then(function (recipe) {
             recipe.addIngredients([ingredientID]).then(function () {
               res.json("Linked ingredient to recipe.");
@@ -82,7 +74,7 @@ module.exports = function (app) {
           });
       } else {
         // console.log(ingredient);
-        db.Ingredient.create({ingredient: ingredient}).then(function (newIngredient) {
+        db.Ingredient.create({ingredient: ingredient}).then(function (newIngredient) { //else, create & then join to recipe
           // console.log(newIngredient);
           db.Recipe.findOne({ where: { id: req.params.recipeID } })
             .then(function (recipe) {
@@ -107,6 +99,8 @@ module.exports = function (app) {
       res.json(onListUpdate);
     });
   });
+
+  // Cool update functions that we didn't quite get around to putting into action ....
 
   // // Change recipe "toMake" true or false
   // app.put("/api/recipes/:recipeID", function (req, res) {
@@ -142,6 +136,7 @@ module.exports = function (app) {
     });
   });
 
+  //would delete an ingredient completely from the db, and I believe it would sever all ties to other recipes... Beware!
   app.delete("/api/ingredients/:ingredientID", function (req, res) {
     db.Ingredient.destroy({ where: { id: req.params.ingredientID } }).then(function (dbDelete) {
       res.json(dbDelete);
@@ -149,38 +144,4 @@ module.exports = function (app) {
   });
 };
 
-
-   
-/////////// OLD STUFF ///////////
-// app.post("/api/recipes/:recipeID", function (req, res) {
-//   db.Ingredient.create(req.body).then(function (newIngredient) {
-//     // res.json(NewIngredient);
-//     // req.params.ingredient = NewIngredient.ingredient;
-//     console.log(newIngredient.id);
-//     // db.List.create({ RecipeId: req.params.recipeID, IngredientID: newIngredient.id } )
-//     //   .then(function () {
-//     //     res.json(newIngredient);
-//     //   });
-//   });
-// });
       
-
-// Create a new Ingredient - insert into Ingredient Table
-// app.post("/api/ingredients", function (req, res) {
-//   db.Ingredient.create(req.body).then(function (NewIngredient) {
-//     res.json(NewIngredient);
-//   });
-// });
-
-// add ingredient to recipe
-// app.post("/api/recipes/:recipeID/ingredients/:ingredientID", function (req, res) {
-//   db.Recipe.findByPk(req.params.recipeID)
-//     .then(function (recipe) {
-//       recipe.setIngredients([req.params.ingredientID]).then(function () {
-//         res.json({});
-//       });
-//     });
-// });
-
-// add ingredient to recipe
- 

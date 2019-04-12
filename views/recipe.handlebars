@@ -39,7 +39,6 @@
           <ul id="ingredient-list" class="list-group">
             {{#each recipe.Ingredients}}
             <li class="list-group-item" style="padding:0rem 1.25rem; margin-bottom: .25rem;">{{this.ingredient}}
-              {{!-- <p></p> --}}
               {{#if this.onList}}
                 <button data-id="{{this.id}}" data-state="{{this.onList}}" class="btn btn-success float-right onList"><i class="far fa-check-square"></i></button>
               {{else}}
