@@ -1,16 +1,29 @@
-<img src="https://media.giphy.com/media/3ohhwerD13QMADpFlu/giphy.gif" class="float-left" id="top-img">
-<div id="home">
-  <div class="container">
-    <div class="row">
-      <div class="col-8 offset-2">
-        
-        {{> title }}
-
-        {{> this-week }}
-
-        {{> add-recipe }}
-       <a style="float: right" href="/shoppinglist">To Shopping List &#8594;</a>
-      </div>
+<div class="container" id="home">
+  <div class="row">
+    <div class="col-8 offset-2">
+      {{> title }}
+      <form class="clearfix mb-4">
+        <div class="form-group">
+          {{!-- <h5>Add a new recipe:</h5> --}}
+          <label for="recipe-text"></label>
+          <input type="text" id="recipe-text" class="form-control" aria-describedby="recipe-text"
+            placeholder="Add a Recipe">
+        </div>
+        <button id="submit" class="btn btn-primary float-right">Submit</button>
+      </form>
+      <h3>Cooking this week:</h3>
+      {{!-- <h6 style="text-align: right">Delete Recipe</h6> --}}
+      <ul id="recipe-list" class="list-group text-dark">
+        {{#each recipes}}
+        <li data-id="{{this.id}}" style="padding:0rem 1.25rem; margin-bottom: .25rem;" class="list-group-item">
+          <a href="recipe/{{this.id}}">{{this.recipeName}}</a>
+          <button class="btn btn-danger float-right delete">ｘ</button>
+        </li>
+        {{/each}}
+      </ul>
+      {{> list-nav }}
+      <hr>
+      {{> footer }}
     </div>
   </div>
 </div>
